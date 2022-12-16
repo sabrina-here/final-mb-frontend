@@ -15,6 +15,51 @@ import "./Home.css";
 import Explore from "../../components/Explore/Explore";
 
 function Home() {
+  // const fishData = [
+  //   {
+  //     id: 1,
+  //     name: "Hilsha Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: hilsha,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Chingri Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: chingri,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Rui Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: rui,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Hilsha Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: hilsha,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Chingri Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: chingri,
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Rui Fish",
+  //     weight: "900gm(+/-)",
+  //     price: 1500,
+  //     fishImage: rui,
+  //   },
+  // ];
+
   const [fishData, setFishData] = useState([]);
 
   useEffect(() => {

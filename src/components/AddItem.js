@@ -10,34 +10,40 @@ function AddItem() {
   const { id } = useParams();
   const imgbbApiKey = 'c442e6714115f58c39b00b3070af9fab'
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log(data)
     let imgData = new FormData()
     imgData.append('image', data.fishImage[0])
 
     const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`
-    axios
+    await axios
       .post(url, imgData)
       .then((res) => {
-        const fishImage = res.data.url
-        const newProduct = {
-          ...data,
-          fishImage: fishImage,
+        console.log('object', res);
+
+        // setTimeout(() => {
+        if (res.data.success) {
+          console.log('yeah...finally', res);
+          const fishImage = res?.data?.data?.url
+          const newProduct = {
+            ...data,
+            fishImage: fishImage,
+          }
+          console.log(fishImage, newProduct)
+          if (id) {
+            axios
+              .put(`${process.env.REACT_APP_API_URL}/product/${id}`, newProduct)
+              .then((res) => toast.success('Product updated successfully!'))
+              .catch((error) => toast.error('Product update failed!'))
+          } else {
+            axios
+              .post(`${process.env.REACT_APP_API_URL}/product/add`, newProduct)
+              .then((res) => toast.success('Product added successfully!'))
+              .catch((error) => toast.error('Product added failed!'))
+          }
         }
-        console.log(fishImage, newProduct);
-        if (id) {
-          axios
-            .put(`${process.env.REACT_APP_API_URL}/product/${id}`, newProduct)
-            .then((res) => toast.success('Product updated successfully!'))
-            .catch((error) => toast.error('Product update failed!'))
-        } else {
-          axios
-            .post(`${process.env.REACT_APP_API_URL}/product/add`, newProduct)
-            .then((res) => toast.success('Product added successfully!'))
-            .catch((error) => toast.error('Product added failed!'))
-        }
-      })
-      .catch((err) => toast.error('Product upload failed'))
+        // }, 2000)
+      }).catch((err) => toast.error('Product upload failed'))
   };
 
   return (
