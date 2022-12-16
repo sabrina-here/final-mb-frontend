@@ -13,7 +13,7 @@ function MainNav() {
   const navigate = useNavigate();
 
   // -------------------------handling user state(logged in or logged out)----------------
-  const { user, logOut, setSeller } = useContext(AuthContext);
+  const { user, logOut, setSeller, seller } = useContext(AuthContext);
   console.log(user);
 
   const handleLogout = () => {
@@ -46,9 +46,13 @@ function MainNav() {
       <nav>
         <Container className="d-flex justify-content-between align-items-center">
           <div className="navbarBrand ">
-            <Link to="/" className="text-decoration-none">
-              <h2 className="fw-bold">Machbazar</h2>
-            </Link>
+            {
+              seller ? <Link to="/sellerHome" className="text-decoration-none">
+                <h2 className="fw-bold">Machbazar</h2>
+              </Link> : <Link to="/" className="text-decoration-none">
+                <h2 className="fw-bold">Machbazar</h2>
+              </Link>
+            }
           </div>
           <div className="searchfield d-flex">
             <input
