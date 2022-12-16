@@ -63,7 +63,7 @@ function Home() {
   const [fishData, setFishData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/fishCards")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => setFishData(data));
   }, []);
