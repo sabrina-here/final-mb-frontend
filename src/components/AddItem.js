@@ -1,49 +1,59 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import AuthContext from "../contexts/AuthProvider";
 import "./AddItem.module.css";
 
-function AddItem() {
+function AddItem({ user }) {
+  console.log(user);
   const { id } = useParams();
-  const imgbbApiKey = 'c442e6714115f58c39b00b3070af9fab'
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = async data => {
-    console.log(data)
-    let imgData = new FormData()
-    imgData.append('image', data.fishImage[0])
+  const imgbbApiKey = "c442e6714115f58c39b00b3070af9fab";
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    console.log(data);
+    let imgData = new FormData();
+    imgData.append("image", data.fishImage[0]);
 
-    const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`
+    const url = `https://api.imgbb.com/1/upload?key=${imgbbApiKey}`;
     await axios
       .post(url, imgData)
       .then((res) => {
-        console.log('object', res);
+        console.log("object", res);
 
         // setTimeout(() => {
         if (res.data.success) {
-          console.log('yeah...finally', res);
-          const fishImage = res?.data?.data?.url
+          console.log("yeah...finally", res);
+          const fishImage = res?.data?.data?.url;
           const newProduct = {
             ...data,
             fishImage: fishImage,
-          }
-          console.log(fishImage, newProduct)
+            sellerId: user.uid,
+          };
+          console.log(fishImage, newProduct);
           if (id) {
             axios
               .put(`${process.env.REACT_APP_API_URL}/product/${id}`, newProduct)
-              .then((res) => toast.success('Product updated successfully!'))
-              .catch((error) => toast.error('Product update failed!'))
+              .then((res) => toast.success("Product updated successfully!"))
+              .catch((error) => toast.error("Product update failed!"));
           } else {
             axios
               .post(`${process.env.REACT_APP_API_URL}/product/add`, newProduct)
-              .then((res) => toast.success('Product added successfully!'))
-              .catch((error) => toast.error('Product added failed!'))
+              .then((res) => toast.success("Product added successfully!"))
+              .catch((error) => toast.error("Product added failed!"));
           }
         }
         // }, 2000)
-      }).catch((err) => toast.error('Product upload failed'))
+      })
+      .catch((err) => toast.error("Product upload failed"));
   };
 
   return (
@@ -72,25 +82,41 @@ function AddItem() {
         <label for="name">
           <b>Fish Name</b>
         </label>
-        <input type="text" placeholder="Enter fish name" {...register("name", { required: true })} />
+        <input
+          type="text"
+          placeholder="Enter fish name"
+          {...register("name", { required: true })}
+        />
         <br />
         {/* <!-- fish weight --> */}
         <label for="weight">
           <b>Weight</b>
         </label>
-        <input type="text" placeholder="Enter minimum weight" {...register("weight", { required: true })} />
+        <input
+          type="text"
+          placeholder="Enter minimum weight"
+          {...register("weight", { required: true })}
+        />
         <br />
         {/* <!-- fish unit price --> */}
         <label for="price">
           <b>Price</b>
         </label>
-        <input type="text" placeholder="Enter unit price" {...register("price", { required: true })} />
+        <input
+          type="text"
+          placeholder="Enter unit price"
+          {...register("price", { required: true })}
+        />
         <br />
         {/* <!-- fish image --> */}
         <label for="image">
           <b>Image</b>
         </label>
-        <input type="file" placeholder="Enter image data" {...register("fishImage", { required: true })} />
+        <input
+          type="file"
+          placeholder="Enter image data"
+          {...register("fishImage", { required: true })}
+        />
         <br />
         <div className="my-3">
           <button type="submit" className="btn btn-light border-secondary">

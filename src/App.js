@@ -16,7 +16,8 @@ import SellerAccount from "./Pages/SellerAccount/SellerAccount";
 import WishList from "./Pages/WishList/WishList";
 import SellerHome from "./Pages/SellerHome/SellerHome";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -40,7 +41,11 @@ function App() {
           path: "/productExtendedView/:id",
           loader: ({ params }) =>
             fetch(`http://localhost:5000/fishCard/${params.id}`),
-          element: <ProductExtendedView></ProductExtendedView>,
+          element: (
+            <PrivateRoute>
+              <ProductExtendedView></ProductExtendedView>
+            </PrivateRoute>
+          ),
         },
         {
           path: `/categories/:id`,
@@ -84,7 +89,11 @@ function App() {
         },
         {
           path: "/sellerHome",
-          element: <SellerHome></SellerHome>,
+          element: (
+            <PrivateRoute>
+              <SellerHome></SellerHome>
+            </PrivateRoute>
+          ),
         },
         {
           path: "/cart",
