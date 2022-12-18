@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import "./FishCard.css";
 
-function FishCard({ fish }) {
-  const { name, weight, price, fishImage } = fish;
+function SellerFishCard({ fish, handleDelete }) {
+  const { name, weight, price, fishImage, _id } = fish;
+
   return (
     <div>
       <div className="card my-2 text-center " style={{ width: "18rem" }}>
@@ -14,18 +13,16 @@ function FishCard({ fish }) {
             <small>weight: {weight}gm</small>
           </p>
           <p className="card-text fw-bold">Tk {price}.00</p>
-
-          <Link
-            className="btn btn-light border border-primary"
-            to={`/productExtendedView/${fish.id}`}
+          <button
+            onClick={() => handleDelete(fish)}
+            className="btn btn-danger border border-danger"
           >
-            {" "}
-            View More
-          </Link>
+            Delete
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default FishCard;
+export default SellerFishCard;

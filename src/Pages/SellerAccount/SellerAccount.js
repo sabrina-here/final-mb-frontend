@@ -21,7 +21,7 @@ function SellerAccount() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/users", {
+    fetch("http://localhost:5000/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",

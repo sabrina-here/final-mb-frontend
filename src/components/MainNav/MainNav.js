@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -13,7 +13,7 @@ function MainNav() {
   const navigate = useNavigate();
 
   // -------------------------handling user state(logged in or logged out)----------------
-  const { user, logOut, setSeller, seller } = useContext(AuthContext);
+  const { user, logOut, setSeller, seller, loading } = useContext(AuthContext);
   console.log(user);
 
   const handleLogout = () => {
@@ -41,18 +41,24 @@ function MainNav() {
     navigate(`/categories/${fish.id}`);
   };
 
+  if (loading) {
+    return <Spinner animation="border" variant="primary" />;
+  }
+
   return (
     <div className="main-nav mt-4 shadow-sm">
       <nav>
         <Container className="d-flex justify-content-between align-items-center">
           <div className="navbarBrand ">
-            {
-              seller ? <Link to="/sellerHome" className="text-decoration-none">
-                <h2 className="fw-bold">Machbazar</h2>
-              </Link> : <Link to="/" className="text-decoration-none">
+            {seller ? (
+              <Link to="/sellerHome" className="text-decoration-none">
                 <h2 className="fw-bold">Machbazar</h2>
               </Link>
-            }
+            ) : (
+              <Link to="/" className="text-decoration-none">
+                <h2 className="fw-bold">Machbazar</h2>
+              </Link>
+            )}
           </div>
           <div className="searchfield d-flex">
             <input
