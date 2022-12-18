@@ -13,6 +13,7 @@ function Registration() {
     password: "",
     confirmPassword: "",
   });
+  const [user, setUser] = useState({ uid: "", userState: "buyer" });
   const { createUser, googleLogin, updateUserName, setSeller } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
@@ -65,6 +66,24 @@ function Registration() {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const createUserInDb = (uid) => {
+    user.uid = uid;
+
+    fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("user added successfully");
+        }
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -73,6 +92,7 @@ function Registration() {
     createUser(values.email, values.password)
       .then((result) => {
         const user = result.user;
+        createUserInDb(user.uid);
         console.log(user);
         form.reset();
         setSeller(false);
@@ -93,6 +113,7 @@ function Registration() {
     googleLogin(googleProvider)
       .then((res) => {
         const user = res.user;
+        createUserInDb(user.uid);
         console.log(user);
         navigate("/");
       })

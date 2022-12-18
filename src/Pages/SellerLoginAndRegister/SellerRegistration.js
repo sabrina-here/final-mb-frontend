@@ -15,7 +15,7 @@ function SellerRegistration() {
     password: "",
     confirmPassword: "",
   });
-  const [user, setUser] = useState({ uid: "" });
+  const [user, setUser] = useState({ uid: "", userState: "seller" });
   const { createUser, googleLogin, updateUserName, setSeller } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
@@ -79,14 +79,9 @@ function SellerRegistration() {
   };
 
   const createUserInDb = (uid) => {
-    const newUser = { ...values };
-    newUser.uid = uid;
-    setUser(newUser);
+    user.uid = uid;
 
-    // -------------Adding user to database-----------
-    console.log(user);
-
-    fetch("http://localhost:5000/users", {
+    fetch("http://localhost:5000/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -174,9 +169,7 @@ function SellerRegistration() {
         </div>
         <div className="text-center">
           <p>
-            <Link to={"/register"}>
-              or Register as Customer
-            </Link>
+            <Link to={"/register"}>or Register as Customer</Link>
           </p>
         </div>
       </form>
