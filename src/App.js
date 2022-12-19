@@ -40,7 +40,7 @@ function App() {
         {
           path: "/productExtendedView/:id",
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/fishCard/${params.id}`),
+            fetch(`http://localhost:5000/product/${params.id}`),
           element: (
             <PrivateRoute>
               <ProductExtendedView></ProductExtendedView>

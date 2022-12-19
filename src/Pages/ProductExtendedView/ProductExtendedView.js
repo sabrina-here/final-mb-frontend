@@ -23,6 +23,7 @@ function ProductExtendedView() {
     type: "cart",
   });
   const fish = useLoaderData();
+  console.log(fish);
   const { name, fishImage, price, weight, id } = fish;
   const { user } = useContext(AuthContext);
 

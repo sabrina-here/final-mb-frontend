@@ -17,7 +17,7 @@ function FishCard({ fish }) {
 
           <Link
             className="btn btn-light border border-primary"
-            to={`/productExtendedView/${fish.id}`}
+            to={`/productExtendedView/${fish._id}`}
           >
             {" "}
             View More
