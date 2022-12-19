@@ -14,7 +14,6 @@ function MainNav() {
 
   // -------------------------handling user state(logged in or logged out)----------------
   const { user, logOut, setSeller, seller, loading } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogout = () => {
     logOut()

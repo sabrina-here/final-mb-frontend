@@ -6,7 +6,6 @@ import "./MainNav/MainNav.css";
 
 function JohnDoe({ user, handleLogout }) {
   const { seller } = useContext(AuthContext);
-  console.log(seller);
   return (
     <div className="dropdown px-3 ms-2">
       <button
