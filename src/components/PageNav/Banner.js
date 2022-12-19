@@ -1,6 +1,10 @@
 import React from "react";
-import carousel_1 from "../../assets/carousel_1.png";
-import carousel_2 from "../../assets/carousel_2.png";
+import carousel_1 from "../../assets/carousel_1.jpg";
+import carousel_2 from "../../assets/carousel_2.jpg";
+import carousel_3 from "../../assets/carousel_3.jpg";
+import carousel_4 from "../../assets/carousel_4.jpg";
+import carousel_5 from "../../assets/carousel_5.jpg";
+import carousel_6 from "../../assets/carousel_6.jpg";
 import "./Banner.css";
 
 function Banner() {
@@ -23,6 +27,34 @@ function Banner() {
             <div className="carousel-item">
               <img
                 src={carousel_2}
+                className="d-block w-100 img-fluid"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src={carousel_3}
+                className="d-block w-100 img-fluid"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src={carousel_4}
+                className="d-block w-100 img-fluid"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src={carousel_5}
+                className="d-block w-100 img-fluid"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item">
+              <img
+                src={carousel_6}
                 className="d-block w-100 img-fluid"
                 alt="..."
               />
