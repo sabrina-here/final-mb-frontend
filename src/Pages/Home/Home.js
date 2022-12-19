@@ -3,14 +3,11 @@ import HeaderBody from "../../components/Header/HeaderBody/HeaderBody";
 import MiniCard from "../../components/MiniCard/MiniCard";
 import checkImage from "../../assets/check.png";
 import delivery from "../../assets/delivery.png";
-import headphone from "../../assets/headphones.png";
+import cashon from "../../assets/cod.png";
 import online from "../../assets/online-payment.png";
 import { Container } from "react-bootstrap";
 import NewArrival from "../../components/NewArrivalFishes/NewArrival";
 import OurSellers from "../../components/OurSellers/OurSellers";
-import hilsha from "../../assets/hilsha.jpg";
-import rui from "../../assets/rui.jpg";
-import chingri from "../../assets/chingri.jpeg";
 import "./Home.css";
 import Explore from "../../components/Explore/Explore";
 
@@ -22,6 +19,7 @@ function Home() {
       .then((res) => res.json())
       .then((data) => setFishData(data));
   }, []);
+
 
   return (
     <div>
@@ -37,7 +35,7 @@ function Home() {
             <MiniCard text={"Free Shipping"} image={delivery}></MiniCard>
           </div>
           <div className="col-12 col-md-6 col-lg-3">
-            <MiniCard text={"Online Payment"} image={headphone}></MiniCard>
+            <MiniCard text={"Cash On Delivery"} image={cashon}></MiniCard>
           </div>
           <div className="col-12 col-md-6 col-lg-3">
             <MiniCard text={"24/7 Support"} image={online}></MiniCard>
@@ -45,17 +43,19 @@ function Home() {
         </div>
       </Container>
       {/* -------------------Most selling fishes section----------------- */}
-      <NewArrival
-        title={"Most Selling fishes"}
-        fishData={fishData}
-      ></NewArrival>
-      {/* -------------------------New arrival fishes section-------------- */}
-      <NewArrival title={"New Arrival Fishes"} fishData={fishData}></NewArrival>
+      <NewArrival title={"Most Selling"} fishData={fishData}></NewArrival>
+
+      {/* -------------------------Category wise-------------- */}
+      <NewArrival title={"ইলিশ সমগ্র"} fishData={fishData}></NewArrival>
+      <NewArrival title={"শুটকি সমগ্র"} fishData={fishData}></NewArrival>
+      <NewArrival title={"রূপচাঁদা সমগ্র"} fishData={fishData}></NewArrival>
+
       {/* ------------------------Our sellers section------------------ */}
       <OurSellers></OurSellers>
 
       {/* ----------------------- Explore More section -------------------------- */}
       <Explore></Explore>
+
     </div>
   );
 }
