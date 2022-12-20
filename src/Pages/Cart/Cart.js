@@ -15,25 +15,28 @@ function Cart() {
   const [total, setTotal] = useState(0);
   const { user } = useContext(AuthContext);
 
+  const deleteFromCart = (item) => {
+    fetch(`http://localhost:5000/deleteItem/${item._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.deletedCount > 0) {
+          const remainingItems = cartItems.filter((it) => it._id != item._id);
+          setCartItems(remainingItems);
+        }
+      });
+  };
+
   const handleDelete = (item, itemTotal) => {
     setTotal(total - itemTotal);
     const agree = window.confirm(
       `Are you sure you want to delete: ${item.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/deleteItem/${item._id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-
-          if (data.deletedCount > 0) {
-            alert("item deleted successfully");
-            const remainingItems = cartItems.filter((it) => it._id != item._id);
-            setCartItems(remainingItems);
-          }
-        });
+      deleteFromCart(item);
     }
   };
 
@@ -74,6 +77,8 @@ function Cart() {
               cartItems={cartItems}
               total={total}
               setTotal={setTotal}
+              handleDelete={deleteFromCart}
+              setCartItems={setCartItems}
             ></CartSummary>
           </div>
         </div>
