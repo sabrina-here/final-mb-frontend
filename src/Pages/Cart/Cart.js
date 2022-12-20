@@ -78,6 +78,7 @@ function Cart() {
               total={total}
               setTotal={setTotal}
               handleDelete={deleteFromCart}
+              setCartItems={setCartItems}
             ></CartSummary>
           </div>
         </div>

@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function CartSummary({ cartItems, total, setTotal, handleDelete }) {
+function CartSummary({
+  cartItems,
+  setCartItems,
+  total,
+  setTotal,
+  handleDelete,
+}) {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const handleCheckout = () => {
@@ -24,6 +30,7 @@ function CartSummary({ cartItems, total, setTotal, handleDelete }) {
         .then((data) => {
           if (data.acknowledged) {
             setTotal(0);
+            setCartItems({});
             handleDelete(item, total);
           }
         });
