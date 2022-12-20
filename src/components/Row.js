@@ -6,14 +6,15 @@ function Row({ item, handleDelete, total, setTotal }) {
   const [itemTotal, setItemTotal] = useState(JSON.parse(item.price));
   const [btnValue, setBtnValue] = useState(JSON.parse(item.quantity));
   const [updatedItem, setUpdatedItem] = useState({ ...item });
+  const { price, quantity } = item;
+  const pricePerGram = (item.price / item.quantity) * 100;
+  console.log(item);
 
   const handleUpdate = (price, quantity) => {
-    console.log(price, quantity);
     const newItem = { ...item };
     newItem.price = price;
     newItem.quantity = quantity;
     setUpdatedItem({ ...newItem });
-    console.log(updatedItem);
 
     fetch(`http://localhost:5000/updateCart/${updatedItem._id}`, {
       method: "PUT",
@@ -31,19 +32,19 @@ function Row({ item, handleDelete, total, setTotal }) {
 
   const handlePlus = () => {
     setBtnValue(btnValue + 100);
-    setItemTotal(itemTotal + 166.67);
-    setTotal(total + 166.67);
+    setItemTotal(itemTotal + pricePerGram);
+    setTotal(total + pricePerGram);
     handleUpdate(
-      JSON.stringify(itemTotal + 166.67),
+      JSON.stringify(itemTotal + pricePerGram),
       JSON.stringify(btnValue + 100)
     );
   };
   const handleMinus = () => {
     setBtnValue(btnValue - 100);
-    setItemTotal(itemTotal - 166.67);
-    setTotal(total - 166.67);
+    setItemTotal(itemTotal - pricePerGram);
+    setTotal(total - pricePerGram);
     handleUpdate(
-      JSON.stringify(itemTotal - 166.67),
+      JSON.stringify(itemTotal - pricePerGram),
       JSON.stringify(btnValue - 100)
     );
   };
@@ -58,7 +59,9 @@ function Row({ item, handleDelete, total, setTotal }) {
         <img src={item.image} alt="" style={{ width: "50px" }} />
         {item.name}
       </td>
-      <td className="align-middle">1500/900gm</td>
+      <td className="align-middle">
+        {JSON.parse(price).toFixed(2)}tk/{JSON.parse(quantity).toFixed(2)}gm
+      </td>
       <td className="align-middle">
         <div
           className=" quantity d-flex justify-content-center mx-auto"

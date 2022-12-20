@@ -18,6 +18,7 @@ import SellerHome from "./Pages/SellerHome/SellerHome";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/PrivateRoute";
+import Modal from "./components/Modal";
 
 function App() {
   const router = createBrowserRouter([
@@ -98,6 +99,10 @@ function App() {
         {
           path: "/cart",
           element: <Cart></Cart>,
+        },
+        {
+          path: "/modal",
+          element: <Modal></Modal>,
         },
       ],
     },

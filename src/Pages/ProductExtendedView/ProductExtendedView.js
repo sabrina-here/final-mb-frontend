@@ -9,9 +9,7 @@ import delivery from "../../assets/delivery.png";
 import chat from "../../assets/chat.png";
 import "./ProductExtendedView.css";
 import { Link, useLoaderData } from "react-router-dom";
-import ReviewContainer from "../../components/ReviewContainer";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { async } from "@firebase/util";
 
 function ProductExtendedView() {
   const [cartItem, setCartItem] = useState({
@@ -165,36 +163,6 @@ function ProductExtendedView() {
           </Col>
         </Row>
       </Container>
-      {/* -----------------------reviews section--------------------------- */}
-      <div className="reviews-title bg-light">
-        <Container>
-          <h2 className="mt-2">Reviews</h2>
-        </Container>
-      </div>
-      <div className="enter-review">
-        <Container>
-          <div className="d-flex justify-content-between not-logged-in-view">
-            <div>
-              <small>Total 62 Reviews</small>
-            </div>
-            <div>
-              {user?.uid ? (
-                <></>
-              ) : (
-                <div>
-                  <small className="mx-2">Please Login to write review</small>
-                  <button className="btn border-secondary text-primary">
-                    <Link className="text-decoration-none" to={"/login"}>
-                      Login
-                    </Link>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </Container>
-      </div>
-      <ReviewContainer user={user} id={id}></ReviewContainer>
     </div>
   );
 }
