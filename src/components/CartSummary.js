@@ -30,7 +30,7 @@ function CartSummary({
         .then((data) => {
           if (data.acknowledged) {
             setTotal(0);
-            setCartItems({});
+            setCartItems([]);
             handleDelete(item, total);
           }
         });
