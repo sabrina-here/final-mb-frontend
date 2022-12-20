@@ -42,8 +42,8 @@ function Home() {
           </div>
         </div>
       </Container>
-      {/* -------------------Most selling fishes section----------------- */}
-      <NewArrival title={"Most Selling"} fishData={fishData}></NewArrival>
+      {/* -------------------Fishes section----------------- */}
+      <NewArrival title={"মাছের সমাহার"} fishData={fishData}></NewArrival>
 
       {/* -------------------------Category wise-------------- */}
       <NewArrival title={"ইলিশ সমগ্র"} fishData={fishData}></NewArrival>
