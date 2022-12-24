@@ -20,7 +20,6 @@ function Home() {
       .then((data) => setFishData(data));
   }, []);
 
-
   return (
     <div>
       {/* ---------- header section------------------------- */}
@@ -55,7 +54,6 @@ function Home() {
 
       {/* ----------------------- Explore More section -------------------------- */}
       <Explore></Explore>
-
     </div>
   );
 }

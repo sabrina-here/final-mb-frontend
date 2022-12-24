@@ -7,16 +7,11 @@ import "../../components/NewArrivalFishes/NewArrival.css";
 import Pagination from "../../components/Pagination/Pagination";
 
 function SearchResult() {
-  const [categoryData, setCategoryData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(12);
-  const [fishData] = useState(useLoaderData());
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/category/${fishData[0].category_id}`)
-      .then((res) => res.json())
-      .then((data) => setCategoryData(data));
-  }, []);
+  // const [fishData] = useState(useLoaderData());
+  const fishData = useLoaderData();
+  console.log(fishData);
 
   // ------------ getting current cards ---------------
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -35,7 +30,7 @@ function SearchResult() {
   return (
     <div className="search-result">
       <Container>
-        <h3 className="mt-3">{categoryData.name}</h3>
+        {/* <h3 className="mt-3">{fishData[0].category}</h3> */}
         <hr />
 
         <div className="my-4 fish-cards">
