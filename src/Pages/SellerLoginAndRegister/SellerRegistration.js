@@ -15,7 +15,12 @@ function SellerRegistration() {
     password: "",
     confirmPassword: "",
   });
-  const [user, setUser] = useState({ uid: "", userState: "seller" });
+  const [user, setUser] = useState({
+    uid: "",
+    userState: "seller",
+    name: "",
+    email: "",
+  });
   const { createUser, googleLogin, updateUserName, setSeller } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
@@ -72,14 +77,16 @@ function SellerRegistration() {
     setValues({ ...values, [e.target.name]: e.target.value });
     const field = e.target.name;
     const value = e.target.value;
-    const newUser = { ...user };
-    newUser[field] = value;
-    setUser(newUser);
+    // const newUser = { ...user };
+    // newUser[field] = value;
+    // setUser(newUser);
     console.log(user);
   };
 
   const createUserInDb = (uid) => {
     user.uid = uid;
+    user.name = values.name;
+    user.email = values.email;
 
     fetch("http://localhost:5000/register", {
       method: "POST",

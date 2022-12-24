@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { Container } from "react-bootstrap";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -6,12 +7,12 @@ import "./BuyerProfile.module.css";
 
 function BuyerProfile() {
   const { user } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState({});
   const [values, setValues] = useState({
     name: user.displayName,
     email: user.email,
     phone: "",
     address: "",
-    uid: user.uid,
   });
 
   const handleOnChange = (e) => {
@@ -19,10 +20,12 @@ function BuyerProfile() {
     console.log(values);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:5000/users", {
-      method: "POST",
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(user);
+
+    fetch(`http://localhost:5000/user/${currentUser._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -32,9 +35,16 @@ function BuyerProfile() {
       .then((data) => {
         if (data.acknowledged) {
           alert("user added successfully");
+          event.target.reset();
         }
       });
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/user/${user.uid}`)
+      .then((res) => res.json())
+      .then((data) => setCurrentUser(data));
+  }, []);
 
   return (
     <div className="container-body">

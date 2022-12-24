@@ -1,47 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { AuthContext } from "../contexts/AuthProvider";
 
-function CartSummary({
-  cartItems,
-  setCartItems,
-  total,
-  setTotal,
-  handleDelete,
-}) {
+function CartSummary({ cartItems, setCartItems, total, setTotal }) {
   const [show, setShow] = useState(false);
-  const navigate = useNavigate();
+  const [order, setOrder] = useState({ orderStatus: "pending" });
+  const { user } = useContext(AuthContext);
   const handleCheckout = () => {
     setShow(true);
+  };
+
+  const deleteCart = () => {
+    fetch(`http://localhost:5000/deleteCart/${user.uid}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCartItems([]);
+        console.log("order", order);
+      });
   };
 
   const handleClose = () => {
     setShow(false);
     cartItems.map((item) => {
+      order.category = item.category;
+      order.fishImage = item.fishImage;
+      order.name = item.name;
+      order.price = item.price;
+      order.sellerId = item.sellerId;
+      order.user = item.user;
+      order.weight = item.weight;
+
       fetch("http://localhost:5000/order/add", {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(item),
+        body: JSON.stringify(order),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
             setTotal(0);
-            setCartItems([]);
-            handleDelete(item, total);
           }
         });
     });
+    deleteCart();
   };
 
   useEffect(() => {
     let totalPrice = 0;
     cartItems.map((item) => {
       totalPrice = totalPrice + JSON.parse(item.price);
-      console.log(totalPrice);
     });
     setTotal(totalPrice);
   }, []);
@@ -52,7 +64,7 @@ function CartSummary({
           <Modal.Header closeButton>
             <Modal.Title>Thank You for Shopping with us</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Order for total Tk{total + 10}</Modal.Body>
+          <Modal.Body>Order for total Tk{(total + 10).toFixed(2)}</Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={handleClose}>
               Confirm Order
@@ -78,7 +90,7 @@ function CartSummary({
           <div className="d-flex justify-content-between mt-2">
             <h5 className="font-weight-bold">Total</h5>
             <h5 className="font-weight-bold">
-              {cartItems.length === 0 ? total : (total + 10).toFixed(2)} tk
+              {cartItems?.length === 0 ? total : (total + 10).toFixed(2)} tk
             </h5>
           </div>
           <button

@@ -13,7 +13,12 @@ function Registration() {
     password: "",
     confirmPassword: "",
   });
-  const [user, setUser] = useState({ uid: "", userState: "buyer" });
+  const [user, setUser] = useState({
+    uid: "",
+    userState: "buyer",
+    name: "",
+    email: "",
+  });
   const { createUser, googleLogin, updateUserName, setSeller } =
     useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
@@ -68,6 +73,8 @@ function Registration() {
 
   const createUserInDb = (uid) => {
     user.uid = uid;
+    user.name = values.name;
+    user.email = values.email;
 
     fetch("http://localhost:5000/register", {
       method: "POST",
