@@ -52,7 +52,7 @@ function App() {
           path: `/categories/:id`,
           element: <SearchResult></SearchResult>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/categories/${params.id}`),
+            fetch(`http://localhost:5000/products/category/${params.name}`),
         },
         {
           path: "/cart/:uid",

@@ -37,7 +37,7 @@ function MainNav() {
 
   const handleProductSearch = () => {
     const fish = fishCategories.find((f) => f.name === searchedProductName);
-    navigate(`/categories/${fish.id}`);
+    navigate(`/categories/${fish.name}`);
   };
 
   if (loading) {

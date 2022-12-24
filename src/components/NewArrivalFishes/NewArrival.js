@@ -6,14 +6,17 @@ import FishCard from "../FishCard/FishCard";
 import "./NewArrival.css";
 
 function NewArrival({ title, fishData }) {
-  const [fishes, setFishes] = useState([]);
+  const [fishes, setFishes] = useState(fishData);
+  console.log(fishData);
 
   const handleViewAll = () => {
     setFishes(fishData);
   };
 
   useEffect(() => {
-    setFishes(fishData.slice(0, 6));
+    if (fishData.length > 6) {
+      setFishes(fishData.slice(0, 6));
+    }
   }, []);
   return (
     <div>

@@ -26,7 +26,7 @@ function Categories() {
           {fishCategories.map((fish) => (
             <div key={fish.id}>
               <li>
-                <Link className="dropdown-item" to={`/categories/${fish.id}`}>
+                <Link className="dropdown-item" to={`/categories/${fish.name}`}>
                   {" "}
                   {fish.name}
                 </Link>
