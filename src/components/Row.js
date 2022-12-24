@@ -4,24 +4,22 @@ import { FaTimes, FaPlus, FaMinus } from "react-icons/fa";
 
 function Row({ item, handleDelete, total, setTotal }) {
   const [itemTotal, setItemTotal] = useState(JSON.parse(item.price));
-  const [btnValue, setBtnValue] = useState(JSON.parse(item.quantity));
+  const [btnValue, setBtnValue] = useState(JSON.parse(item.weight));
   const [updatedItem, setUpdatedItem] = useState({ ...item });
-  const { price, quantity } = item;
-  const pricePerGram = (item.price / item.quantity) * 100;
-  console.log(item);
+  const { price, weight } = item;
+  const pricePerGram = (JSON.parse(item.price) / JSON.parse(item.weight)) * 100;
 
-  const handleUpdate = (price, quantity) => {
-    const newItem = { ...item };
-    newItem.price = price;
-    newItem.quantity = quantity;
-    setUpdatedItem({ ...newItem });
+  const handleUpdate = (price, weight) => {
+    item.price = price;
+    item.weight = weight;
+    // console.log(item);
 
-    fetch(`http://localhost:5000/updateCart/${updatedItem._id}`, {
+    fetch(`http://localhost:5000/updateCart/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(updatedItem),
+      body: JSON.stringify(item),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -50,17 +48,17 @@ function Row({ item, handleDelete, total, setTotal }) {
   };
 
   useEffect(() => {
-    setBtnValue(JSON.parse(item.quantity));
+    setBtnValue(JSON.parse(item.weight));
   }, []);
 
   return (
     <tr>
       <td className="align-middle">
-        <img src={item.image} alt="" style={{ width: "50px" }} />
+        <img src={item.fishImage} alt="" style={{ width: "50px" }} />
         {item.name}
       </td>
       <td className="align-middle">
-        {JSON.parse(price).toFixed(2)}tk/{JSON.parse(quantity).toFixed(2)}gm
+        {JSON.parse(price).toFixed(2)}tk/{JSON.parse(item.weight).toFixed(2)}gm
       </td>
       <td className="align-middle">
         <div

@@ -5,30 +5,13 @@ import { useState } from "react";
 
 import Row from "../../components/Row";
 import CartSummary from "../../components/CartSummary";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthProvider";
 import SideNav from "../../components/SideNav";
 
 function Cart() {
   const cart = useLoaderData();
   const [cartItems, setCartItems] = useState(cart);
   const [total, setTotal] = useState(0);
-  const { user } = useContext(AuthContext);
-
-  const deleteFromCart = (item) => {
-    fetch(`http://localhost:5000/deleteItem/${item._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-
-        if (data.deletedCount > 0) {
-          const remainingItems = cartItems.filter((it) => it._id != item._id);
-          setCartItems(remainingItems);
-        }
-      });
-  };
+  // console.log("cartItems", cartItems);
 
   const handleDelete = (item, itemTotal) => {
     setTotal(total - itemTotal);
@@ -36,7 +19,18 @@ function Cart() {
       `Are you sure you want to delete: ${item.name}`
     );
     if (agree) {
-      deleteFromCart(item);
+      fetch(`http://localhost:5000/deleteItem/${item._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+
+          if (data.deletedCount > 0) {
+            const remainingItems = cartItems.filter((it) => it._id != item._id);
+            setCartItems(remainingItems);
+          }
+        });
     }
   };
 
@@ -59,7 +53,7 @@ function Cart() {
                 </tr>
               </thead>
               <tbody className="align-middle">
-                {cartItems.map((item) => (
+                {cartItems?.map((item) => (
                   <Row
                     item={item}
                     key={item._id}
@@ -77,7 +71,6 @@ function Cart() {
               cartItems={cartItems}
               total={total}
               setTotal={setTotal}
-              handleDelete={deleteFromCart}
               setCartItems={setCartItems}
             ></CartSummary>
           </div>

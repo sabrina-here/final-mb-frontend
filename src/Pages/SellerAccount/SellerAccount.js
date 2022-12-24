@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import SideNav from "../../components/SideNav";
 import "../../components/BuyerProfile/BuyerProfile.module.css";
@@ -6,12 +6,12 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 function SellerAccount() {
   const { user } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState({});
   const [values, setValues] = useState({
     name: user.displayName,
     email: user.email,
     phone: "",
     address: "",
-    uid: user.uid,
   });
 
   const handleOnChange = (e) => {
@@ -19,10 +19,12 @@ function SellerAccount() {
     console.log(values);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:5000/register", {
-      method: "POST",
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(user);
+
+    fetch(`http://localhost:5000/user/${currentUser._id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -32,9 +34,15 @@ function SellerAccount() {
       .then((data) => {
         if (data.acknowledged) {
           alert("user added successfully");
+          event.target.reset();
         }
       });
   };
+  useEffect(() => {
+    fetch(`http://localhost:5000/user/${user.uid}`)
+      .then((res) => res.json())
+      .then((data) => setCurrentUser(data));
+  }, []);
   return (
     <Row>
       <Col>

@@ -1,12 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
 
-function WishCard({ fish }) {
+function WishCard({ fish, handleDelete }) {
   const { name, weight, price, fishImage } = fish;
+  const [wishItem, setWishItem] = useState({
+    user: "",
+  });
+  const { user } = useContext(AuthContext);
+
+  const handleAddToCart = () => {
+    fetch("http://localhost:5000/addCartItem", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(wishItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("product added to cart");
+          handleDelete(fish);
+        }
+      });
+  };
+
+  useEffect(() => {
+    const newItem = {};
+    newItem.name = name;
+    newItem.category = fish.category;
+    newItem.fishImage = fishImage;
+    newItem.price = price;
+    newItem.weight = weight;
+    newItem.sellerId = fish.sellerId;
+    setWishItem({ ...newItem, user: user.uid });
+  }, []);
+
   return (
     <div>
       <div
-        className="card my-2 text-center "
+        className="card my-4 text-center "
         style={{ width: "200px", height: "300px" }}
       >
         <img
@@ -22,13 +57,18 @@ function WishCard({ fish }) {
           </p>
           <p className="card-text fw-bold">Tk {price}.00</p>
 
-          <Link
-            className="btn btn-light border border-primary"
-            to={`/productExtendedView/${fish.id}`}
+          <button
+            className="btn btn-light border-primary d-inline"
+            onClick={handleAddToCart}
           >
-            {" "}
-            View More
-          </Link>
+            cart
+          </button>
+          <button
+            className="btn btn-light border-danger mx-2 d-inline"
+            onClick={() => handleDelete(fish)}
+          >
+            delete
+          </button>
         </div>
       </div>
     </div>

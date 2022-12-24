@@ -16,9 +16,8 @@ function Categories() {
     <div>
       <div className="dropdown open categories">
         <button
-          className="btn dropdown-toggle categories-btn"
+          className="btn  categories-btn"
           type="button"
-          data-bs-toggle="dropdown"
           aria-expanded="true"
         >
           Categories

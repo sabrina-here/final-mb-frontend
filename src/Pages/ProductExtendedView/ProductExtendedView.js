@@ -14,24 +14,24 @@ import { AuthContext } from "../../contexts/AuthProvider";
 function ProductExtendedView() {
   const [cartItem, setCartItem] = useState({
     user: "",
-    name: "",
-    price: "",
-    quantity: "900",
-    image: "",
-    type: "cart",
   });
+  const [seller, setSeller] = useState({});
   const fish = useLoaderData();
-  console.log(fish);
-  const { name, fishImage, price, weight, id } = fish;
+  const { name, fishImage, price, weight } = fish;
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    let newItem = { ...cartItem };
-    newItem.user = user.uid;
+    fetch(`http://localhost:5000/user/${fish.sellerId}`)
+      .then((res) => res.json())
+      .then((data) => setSeller(data));
+    const newItem = {};
     newItem.name = name;
+    newItem.category = fish.category;
+    newItem.fishImage = fishImage;
     newItem.price = price;
-    newItem.image = fishImage;
-    setCartItem(newItem);
+    newItem.weight = weight;
+    newItem.sellerId = fish.sellerId;
+    setCartItem({ ...newItem, user: user.uid });
   }, []);
 
   const handleAddToCart = () => {
@@ -48,7 +48,23 @@ function ProductExtendedView() {
           alert("product added to cart");
         }
       });
-    console.log(cartItem);
+    // console.log(cartItem);
+  };
+
+  const handleAddToWish = () => {
+    fetch("http://localhost:5000/wishlist/add", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(cartItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          alert("product added to wish list");
+        }
+      });
   };
 
   return (
@@ -61,10 +77,10 @@ function ProductExtendedView() {
             <div className="product-info mt-3 ms-4">
               <h3>{name} (Taza)</h3>
               <p>
-                By <span className="text-primary">Karim Ali</span>
+                By <p className="text-primary d-inline">{seller.name}</p>
               </p>
               <p>
-                Category : <span className="fw-bold">Fish</span>
+                Category : <p className="fw-bold d-inline">{fish.category}</p>
               </p>
               <p>65 Reviews</p>
               <hr />
@@ -102,7 +118,10 @@ function ProductExtendedView() {
                 >
                   Add to Cart
                 </button>
-                <button className="btn btn-light border border-secondary">
+                <button
+                  className="btn btn-light border border-secondary"
+                  onClick={handleAddToWish}
+                >
                   Add to WishList
                 </button>
               </div>
