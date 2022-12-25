@@ -60,7 +60,7 @@ function BuyerProfile() {
           <input
             type="text"
             placeholder="Enter your Name"
-            value={user.displayName}
+            defaultValue={user.displayName}
             name="name"
             onChange={handleOnChange}
             required
@@ -85,6 +85,7 @@ function BuyerProfile() {
             type="text"
             placeholder="Enter your Contact No."
             name="phone"
+            defaultValue={currentUser.phone}
             onChange={handleOnChange}
             required
           />
@@ -97,6 +98,7 @@ function BuyerProfile() {
             cols="60"
             rows="10"
             required
+            defaultValue={currentUser.address}
             onChange={handleOnChange}
             placeholder="Enter Shipping Address"
           ></textarea>
