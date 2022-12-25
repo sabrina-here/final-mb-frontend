@@ -145,13 +145,7 @@ function ProductExtendedView() {
                 </p>
                 <div className="d-flex justify-content-around align-items-center">
                   <p>
-                    <small>Black Adam fish house</small>
-                  </p>
-                  <p>
-                    <small className="text-primary d-flex">
-                      <img src={chat} alt="" className="chat-icon mx-1" />
-                      CHAT
-                    </small>
+                    <small>{seller.name}</small>
                   </p>
                 </div>
                 <div className="d-flex my-2 mb-4">
@@ -162,15 +156,13 @@ function ProductExtendedView() {
                   </p>
                   <p className="mt-4">
                     {" "}
-                    <small>0132-154466</small>
+                    <small>{seller.phone}</small>
                   </p>
                 </div>
               </Container>
               <hr className="mt-4" />
               <div className="text-center">
-                <Link className="text-center text-decoration-none" to="/">
-                  <small>Visit Store</small>
-                </Link>
+                <small>Shop Address: <br />{seller.address}</small>
               </div>
             </div>
           </Col>
