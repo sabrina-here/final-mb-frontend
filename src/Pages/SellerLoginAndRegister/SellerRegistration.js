@@ -11,18 +11,20 @@ function SellerRegistration() {
   const [values, setValues] = useState({
     name: "",
     email: "",
-    birthday: "",
+    phone: "",
     password: "",
     confirmPassword: "",
   });
+
   const [user, setUser] = useState({
     uid: "",
     userState: "seller",
     name: "",
+    phone: "",
     email: "",
   });
-  const { createUser, googleLogin, updateUserName, setSeller } =
-    useContext(AuthContext);
+
+  const { createUser, googleLogin, updateUserName, setSeller } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -44,12 +46,13 @@ function SellerRegistration() {
       name: "phone",
       type: "text",
       placeholder: "Enter Your Phone number",
-      errorMessage: " ",
+      errorMessage: "Please enter a phone number",
+      required: true,
     },
     {
       id: 3,
       name: "email",
-      type: "email",
+      type: "text",
       placeholder: "Email",
       errorMessage: "Please enter a valid email address!",
       required: true,
@@ -75,17 +78,18 @@ function SellerRegistration() {
 
   const handleOnChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    const field = e.target.name;
-    const value = e.target.value;
+    // const field = e.target.name;
+    // const value = e.target.value;
     // const newUser = { ...user };
     // newUser[field] = value;
     // setUser(newUser);
-    console.log(user);
+    // console.log(user);
   };
 
   const createUserInDb = (uid) => {
     user.uid = uid;
     user.name = values.name;
+    user.phone = values.phone;
     user.email = values.email;
 
     fetch("http://localhost:5000/register", {
@@ -119,6 +123,7 @@ function SellerRegistration() {
       })
       .catch((e) => console.log(e));
   };
+
   const handleUpdateUser = (name) => {
     updateUserName(name)
       .then(() => {
@@ -142,6 +147,7 @@ function SellerRegistration() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="form my-4">
+        <span className="title">Seller!</span>
         <span className="title">Create Account</span>
         <div>
           {inputs.map((input) => (

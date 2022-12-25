@@ -10,17 +10,20 @@ function Registration() {
   const [values, setValues] = useState({
     name: "",
     email: "",
+    phone: "",
     password: "",
     confirmPassword: "",
   });
+
   const [user, setUser] = useState({
     uid: "",
     userState: "buyer",
     name: "",
+    phone: "",
     email: "",
   });
-  const { createUser, googleLogin, updateUserName, setSeller } =
-    useContext(AuthContext);
+
+  const { createUser, googleLogin, updateUserName, setSeller } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -38,12 +41,13 @@ function Registration() {
       name: "phone",
       type: "text",
       placeholder: "Enter Your Phone number",
-      errorMessage: " ",
+      errorMessage: "Please enter a phone number",
+      required: true,
     },
     {
       id: 3,
       name: "email",
-      type: "email",
+      type: "text",
       placeholder: "Email",
       errorMessage: "Please enter a valid email address!",
       required: true,
@@ -74,6 +78,7 @@ function Registration() {
   const createUserInDb = (uid) => {
     user.uid = uid;
     user.name = values.name;
+    user.phone = values.phone;
     user.email = values.email;
 
     fetch("http://localhost:5000/register", {
@@ -105,8 +110,9 @@ function Registration() {
         setSeller(false);
         handleUpdateUser(values.name);
       })
-      .catch((e) => alert("email password already in use!!!"));
+      .catch((e) => alert("Email password already in use!"));
   };
+
   const handleUpdateUser = (name) => {
     updateUserName(name)
       .then(() => {
@@ -130,6 +136,7 @@ function Registration() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="form my-4">
+        <span className="title">Customer!</span>
         <span className="title">Create Account</span>
         <div>
           {inputs.map((input) => (
