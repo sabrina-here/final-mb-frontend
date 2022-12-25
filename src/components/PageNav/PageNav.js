@@ -11,6 +11,7 @@ function PageNav() {
   const cartCount = 0;
   const heartCount = 0;
   const { user } = useContext(AuthContext);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-light">

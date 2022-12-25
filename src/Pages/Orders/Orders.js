@@ -49,12 +49,14 @@ function Orders() {
         .then((data) => setOrders(data));
     }
   }, []);
+
   useEffect(() => {
     setPendingOrders(orders.filter((order) => order.orderStatus === "pending"));
     setCompletedOrders(
       orders.filter((order) => order.orderStatus === "completed")
     );
   }, [orders, setOrders]);
+  
   return (
     <Row>
       <Col>

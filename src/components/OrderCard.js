@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 
 function OrderCard({ order, handleDelete }) {
   const { seller } = useContext(AuthContext);
+
   const handleUpdate = () => {
     order.orderStatus = "completed";
     fetch(`http://localhost:5000/updateOrder/${order._id}`, {
@@ -20,6 +21,7 @@ function OrderCard({ order, handleDelete }) {
         }
       });
   };
+
   return (
     <div>
       <div
@@ -29,13 +31,13 @@ function OrderCard({ order, handleDelete }) {
         <img src={order.fishImage} style={{ width: "100px" }} />
         <div className="d-flex justify-content-between w-100">
           <div className="ms-2">
-            <p className="m-0 text-start">order-Id: {order._id}</p>
-            <p className="m-0 text-start">name: {order.name}</p>
+            <p className="m-0 text-start">Order Id: {order._id.substr(order._id.length - 4)}</p>
+            <p className="m-0 text-start">Product Name: {order.name}</p>
             <p className="m-0 text-start">
-              weight: <p className="d-inline text-primary">{order.weight}</p>
+              Weight: <p className="d-inline text-primary">{order.weight}</p>
             </p>
             <p className="m-0 text-start">
-              price: <p className="d-inline text-primary ">{order.price}</p>
+              Price: <p className="d-inline text-primary ">{order.price}</p>
             </p>
           </div>
           <button
