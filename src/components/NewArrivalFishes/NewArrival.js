@@ -13,8 +13,8 @@ function NewArrival({ title, fishData }) {
   };
 
   useEffect(() => {
-    if (fishData.length > 6) {
-      setFishes(fishData.slice(0, 6));
+    if (fishes.length > 6) {
+      setFishes(fishes.slice(0, 6));
     }
   }, []);
 

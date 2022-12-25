@@ -54,7 +54,6 @@ function Orders() {
     setCompletedOrders(
       orders.filter((order) => order.orderStatus === "completed")
     );
-    console.log(pendingOrders);
   }, [orders, setOrders]);
   return (
     <Row>

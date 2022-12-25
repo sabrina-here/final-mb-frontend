@@ -83,6 +83,7 @@ function SellerAccount() {
             <input
               type="text"
               placeholder="Enter your Contact No."
+              defaultValue={currentUser.phone}
               name="phone"
               onChange={handleOnChange}
               required
@@ -92,7 +93,7 @@ function SellerAccount() {
             <hr />
             <textarea
               name="address"
-              id=""
+              defaultValue={currentUser.address}
               cols="60"
               rows="10"
               required
