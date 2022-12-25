@@ -29,11 +29,12 @@ function OrderCard({ order, handleDelete }) {
         <img src={order.fishImage} style={{ width: "100px" }} />
         <div className="d-flex justify-content-between w-100">
           <div className="ms-4">
-            <p className="m-0">name: {order.name}</p>
-            <p className="m-0">
+            <p className="m-0">order-Id: {order._id}</p>
+            <p className="m-0 text-start">name: {order.name}</p>
+            <p className="m-0 text-start">
               weight: <p className="d-inline text-primary">{order.weight}</p>
             </p>
-            <p className="m-0">
+            <p className="m-0 text-start">
               price: <p className="d-inline text-primary ">{order.price}</p>
             </p>
           </div>

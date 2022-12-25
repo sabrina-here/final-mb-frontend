@@ -11,7 +11,7 @@ function BuyerProfile() {
   const [values, setValues] = useState({
     name: user.displayName,
     email: user.email,
-    phone: "",
+    phone: currentUser.phone,
     address: "",
   });
 
