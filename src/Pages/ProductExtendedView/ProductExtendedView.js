@@ -15,6 +15,7 @@ function ProductExtendedView() {
   const [cartItem, setCartItem] = useState({
     user: "",
   });
+
   const [seller, setSeller] = useState({});
   const fish = useLoaderData();
   const { name, fishImage, price, weight } = fish;
@@ -24,6 +25,7 @@ function ProductExtendedView() {
     fetch(`http://localhost:5000/user/${fish.sellerId}`)
       .then((res) => res.json())
       .then((data) => setSeller(data));
+
     const newItem = {};
     newItem.name = name;
     newItem.category = fish.category;
@@ -75,35 +77,24 @@ function ProductExtendedView() {
           <Col className="product-container d-lg-flex gx-4" xs="12" lg="8">
             <img className="img-fluid" src={fishImage} alt="" />
             <div className="product-info mt-3 ms-4">
-              <h3>{name} (Taza)</h3>
+              <h3>{name}</h3>
               <p>
                 By <p className="text-primary d-inline">{seller.name}</p>
               </p>
               <p>
                 Category : <p className="fw-bold d-inline">{fish.category}</p>
               </p>
-              <p>65 Reviews</p>
-              <hr />
+              <hr className="border border-2 black" />
+              <p>
+                Weight : <p className="fw-bold d-inline">{weight} gm</p>
+              </p>
+              <h3>Tk. {price}</h3>
               <p>
                 <small>
                   Net weight will be 10-20% lower depending on cutting
                   preference
                 </small>
               </p>
-              <div className="d-flex align-items-center">
-                <p className="mt-3">Weight:</p>
-                <DropdownButton
-                  id="dropdown-variants-light"
-                  variant="light"
-                  title="Choose an Option"
-                  className="ms-3"
-                >
-                  <Dropdown.Item href="#/action-1">{weight}</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">1kg(+/-)</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">1.5kg(+/-)</Dropdown.Item>
-                </DropdownButton>
-              </div>
-              <h3>Tk. {price}</h3>
               <div className="in-stock d-flex align-items-center">
                 <FaCheckCircle className="check-icon" />
                 <p className="mt-3 ms-2">
@@ -127,6 +118,7 @@ function ProductExtendedView() {
               </div>
             </div>
           </Col>
+
           {/* -------------------------- store details--------------------- */}
           <Col className="store-detail-container" xs lg="4">
             <div className="store-detail">
@@ -144,7 +136,9 @@ function ProductExtendedView() {
                   <p className="fw-bold mt-3">Standard Delivery</p>
                 </div>
               </Container>
-              <hr />
+
+              <hr className="border border-2" />
+
               <Container className="mb-4">
                 <p>
                   <small className="text-muted">sold by</small>
