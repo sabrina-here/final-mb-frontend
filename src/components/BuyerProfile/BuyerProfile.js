@@ -22,7 +22,7 @@ function BuyerProfile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
+    console.log(values);
 
     fetch(`http://localhost:5000/user/${currentUser._id}`, {
       method: "PUT",
@@ -43,7 +43,11 @@ function BuyerProfile() {
   useEffect(() => {
     fetch(`http://localhost:5000/user/${user.uid}`)
       .then((res) => res.json())
-      .then((data) => setCurrentUser(data));
+      .then((data) => {
+        setCurrentUser(data);
+        values.phone = currentUser.phone;
+        console.log(data);
+      });
   }, []);
 
   return (
