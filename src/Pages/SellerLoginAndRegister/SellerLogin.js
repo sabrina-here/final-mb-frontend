@@ -121,17 +121,17 @@ function SellerLogin() {
             <p className="text-danger">
               {error}{" "}
               <p className="text-primary d-block" onClick={handleForgotPass}>
-                forgot password
+                forgot password?
               </p>
             </p>
           ) : (
             <p className="text-primary " onClick={handleForgotPass}>
-              forgot password
+              forgot password?
             </p>
           )}
         </a>
 
-        <div className="input-field ">
+        <div className="input-field">
           <button type="submit" className="button w-100 p-2 mt-0">
             log in
           </button>
@@ -141,7 +141,7 @@ function SellerLogin() {
       <div className="login-signup">
         <p className="text">
           Don't have an account?
-          <Link to={"/register"} className="text signup-link">
+          <Link to={"/register"} className="text signup-link ms-1">
             Signup Now!
           </Link>
           <h5>or login with</h5>
