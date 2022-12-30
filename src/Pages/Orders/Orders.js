@@ -103,7 +103,8 @@ function Orders() {
             </p>
           </h4>
 
-          <hr />
+          <hr className="border border-secondary" />
+
           <div>
             {completedOrders.map((order) => (
               <OrderCard
@@ -130,7 +131,8 @@ function Orders() {
             </p>
           </h4>
 
-          <hr />
+          <hr className="border border-secondary" />
+
           <div>
             {pendingOrders.map((order) => (
               <OrderCard

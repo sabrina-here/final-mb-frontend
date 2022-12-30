@@ -145,12 +145,6 @@ function ProductExtendedView() {
                   <p>
                     <small>{seller.name}</small>
                   </p>
-                  <p>
-                    <small className="text-primary d-flex">
-                      <img src={chat} alt="" className="chat-icon mx-1" />
-                      CHAT
-                    </small>
-                  </p>
                 </div>
                 <div className="d-flex my-2 mb-4">
                   <p className="calling-info">

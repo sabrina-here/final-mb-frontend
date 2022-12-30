@@ -30,9 +30,9 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
       <>
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Body>
-            <p>name: {modalInfo.name}</p>
-            <p>phone: {modalInfo.phone}</p>
-            <p>address: {modalInfo.address}</p>
+            <p>Name: {modalInfo.name}</p>
+            <p>Phone: {modalInfo.phone}</p>
+            <p>Address: {modalInfo.address}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="light" onClick={handleClose}>
@@ -50,11 +50,11 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
         <div className="d-flex justify-content-between w-100">
           <div className="ms-2">
             <p className="m-0 text-start">
-              <p className="d-inline fw-bold">order-Id: </p>{" "}
-              <p className="d-inline text-primary">{orderId.slice(-4)}</p>
+              <p className="d-inline fw-bold">OrderId: </p>{" "}
+              <p className="d-inline text-primary">{orderId.slice(-6)}</p>
             </p>
             <p className="m-0 text-start">
-              name: <p className="d-inline text-primary"> {order.name}</p>
+              Product: <p className="d-inline text-primary"> {order.name}</p>
             </p>
             <p className="m-0 text-start">
               Weight: <p className="d-inline text-primary">{order.weight}</p>
@@ -69,7 +69,7 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
               style={{ width: "100px", height: "100px" }}
               onClick={handleDetails}
             >
-              view details
+              View <br /> details
             </button>
             {seller && order.orderStatus === "pending" && (
               <>
@@ -78,7 +78,7 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
                   style={{ width: "100px", height: "100px" }}
                   onClick={() => handleUpdate(order)}
                 >
-                  order delivered
+                  Order <br /> Delivered
                 </button>
               </>
             )}
@@ -88,7 +88,7 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
                 style={{ width: "100px", height: "100px" }}
                 onClick={() => handleDelete(order)}
               >
-                delete
+                Delete
               </button>
             )}
           </div>
