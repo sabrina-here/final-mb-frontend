@@ -145,7 +145,7 @@ function ProductExtendedView() {
                 </p>
                 <div className="d-flex justify-content-around align-items-center">
                   <p>
-                    <small>Black Adam fish house</small>
+                    <small>{seller.name}</small>
                   </p>
                   <p>
                     <small className="text-primary d-flex">
