@@ -13,11 +13,29 @@ import "./Home.css";
 
 function Home() {
   const [fishData, setFishData] = useState([]);
+  const [seaFish, setSeaFish] = useState([]);
+  const [dryFish, setDryFish] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => setFishData(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/products")
+      .then((res) => res.json())
+      .then((data) => {
+        const filtered1 = data.filter(fish => {
+          return fish.category === 'sea';
+        });
+        setSeaFish(filtered1);
+
+        const filtered2 = data.filter(fish => {
+          return fish.category === 'dry fish';
+        });
+        setDryFish(filtered2);
+      });
   }, []);
 
   return (
@@ -47,12 +65,11 @@ function Home() {
       <NewArrival title={"মাছের সমাহার"} fishData={fishData}></NewArrival>
 
       {/* -------------------------Category wise-------------- */}
-      <NewArrival title={"সামুদ্রিক মাছ"} fishData={fishData}></NewArrival>
-      <NewArrival title={"শুটকি মাছ সমগ্র"} fishData={fishData}></NewArrival>
-      <NewArrival title={"নদীর মাছ"} fishData={fishData}></NewArrival>
+      <NewArrival title={"শুটকি মাছ সমগ্র"} fishData={dryFish}></NewArrival>
+      <NewArrival title={"সামুদ্রিক মাছ"} fishData={seaFish}></NewArrival>
 
       {/* ----------------------- Explore More section -------------------------- */}
-      <Explore></Explore>
+      <Container className="my-5"><Explore></Explore></Container>
     </div>
   );
 }

@@ -46,6 +46,7 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
         className="border border-secondary mx-auto d-flex  my-3"
       >
         <img src={order.fishImage} style={{ width: "100px" }} />
+
         <div className="d-flex justify-content-between w-100">
           <div className="ms-2">
             <p className="m-0 text-start">
@@ -56,10 +57,10 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
               name: <p className="d-inline text-primary"> {order.name}</p>
             </p>
             <p className="m-0 text-start">
-              weight: <p className="d-inline text-primary">{order.weight}</p>
+              Weight: <p className="d-inline text-primary">{order.weight}</p>
             </p>
             <p className="m-0 text-start">
-              price: <p className="d-inline text-primary ">{order.price}</p>
+              Price: <p className="d-inline text-primary ">{order.price}</p>
             </p>
           </div>
           <div>

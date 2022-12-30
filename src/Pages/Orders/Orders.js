@@ -75,18 +75,20 @@ function Orders() {
         .then((data) => setOrders(data));
     }
   }, []);
+
   useEffect(() => {
     setPendingOrders(orders.filter((order) => order.orderStatus === "pending"));
     setCompletedOrders(
       orders.filter((order) => order.orderStatus === "completed")
     );
   }, [orders, setOrders]);
+
   return (
     <Row>
       <Col>
         <SideNav></SideNav>
       </Col>
-      <Col lg={8} md={12} className="text-center">
+      <Col lg={8} md={12} className="text-center me-5">
         {/* ---------------------- completed orders list------------------- */}
         <div>
           <h4 className="my-4">
@@ -113,6 +115,7 @@ function Orders() {
             ))}
           </div>
         </div>
+
         {/* ------------------------pending orders list---------------------- */}
         <div>
           <h4 className="my-4">
