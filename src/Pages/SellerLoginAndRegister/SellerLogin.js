@@ -63,7 +63,7 @@ function SellerLogin() {
       })
       .catch((e) => {
         console.error(e);
-        setError("Wrong Email/Password. Please Try again");
+        setError("Wrong Email or Password. Please Try again!");
       });
   };
 
@@ -85,7 +85,7 @@ function SellerLogin() {
       resetPass(values.email)
         .then(() => {
           setModalText(
-            "password reset mail has been sent. please check your email."
+            "Password reset mail has been sent, please check your email."
           );
           setModalShow(true);
         })
@@ -120,14 +120,14 @@ function SellerLogin() {
           {error ? (
             <p className="text-danger">
               {error}{" "}
-              <p className="text-primary d-block" onClick={handleForgotPass}>
+              <button className="forgotbtn text-primary d-block" onClick={handleForgotPass}>
                 forgot password?
-              </p>
+              </button>
             </p>
           ) : (
-            <p className="text-primary " onClick={handleForgotPass}>
+            <button className=" forgotbtn text-primary " onClick={handleForgotPass}>
               forgot password?
-            </p>
+            </button>
           )}
         </a>
 

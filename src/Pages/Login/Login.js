@@ -115,14 +115,14 @@ function Login() {
           {error ? (
             <p className="text-danger">
               {error}{" "}
-              <p className="text-primary d-block" onClick={handleForgotPass}>
+              <button className="forgotbtn text-primary d-block" onClick={handleForgotPass}>
                 forgot password?
-              </p>
+              </button>
             </p>
           ) : (
-            <p className="text-primary " onClick={handleForgotPass}>
+            <button className="forgotbtn text-primary" onClick={handleForgotPass}>
               forgot password?
-            </p>
+            </button>
           )}
         </a>
 
