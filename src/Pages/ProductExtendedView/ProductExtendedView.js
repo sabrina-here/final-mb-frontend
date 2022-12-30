@@ -145,6 +145,12 @@ function ProductExtendedView() {
                   <p>
                     <small>{seller.name}</small>
                   </p>
+                  <p>
+                    <small className="text-primary d-flex">
+                      <img src={chat} alt="" className="chat-icon mx-1" />
+                      CHAT
+                    </small>
+                  </p>
                 </div>
                 <div className="d-flex my-2 mb-4">
                   <p className="calling-info">
@@ -160,7 +166,10 @@ function ProductExtendedView() {
               </Container>
               <hr className="mt-4" />
               <div className="text-center">
-                <small>Shop Address: <br />{seller.address}</small>
+                <small>
+                  Shop Address: <br />
+                  {seller.address}
+                </small>
               </div>
             </div>
           </Col>
