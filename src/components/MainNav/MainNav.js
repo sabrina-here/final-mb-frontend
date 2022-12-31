@@ -59,21 +59,15 @@ function MainNav() {
             )}
           </div>
           <div className="searchfield d-flex">
-            {seller ? (
-              <></>
-            ) : (
-              <>
-                <input
-                  type="text"
-                  placeholder="search for products"
-                  id="product-search"
-                  onChange={handleSetSearchedProductName}
-                />
-                <button className="bg-white border-light">
-                  <FaSearch className="icon" onClick={handleProductSearch} />
-                </button>
-              </>
-            )}
+            <input
+              type="text"
+              placeholder="search for products"
+              id="product-search"
+              onChange={handleSetSearchedProductName}
+            />
+            <button className="bg-white border-light">
+              <FaSearch className="icon" onClick={handleProductSearch} />
+            </button>
           </div>
           <div>
             {user?.uid ? (
