@@ -45,6 +45,7 @@ function BuyerProfile() {
       .then((data) => {
         setCurrentUser(data);
         values.phone = currentUser.phone;
+        values.address = currentUser.address;
       });
   }, []);
 
