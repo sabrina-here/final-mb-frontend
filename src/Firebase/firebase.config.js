@@ -5,15 +5,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCMdmhHjhxznD7lhtmusEZKzyofAe7fULY",
-  authDomain: "machbazar-70f99.firebaseapp.com",
-  projectId: "machbazar-70f99",
-  storageBucket: "machbazar-70f99.appspot.com",
-  messagingSenderId: "199654725644",
-  appId: "1:199654725644:web:4b29910cd453df01cf7629",
+  apiKey: "AIzaSyDLY_G1-HWxb0wR5R6kCSzGqlgyMAnVDWg",
+  authDomain: "machbazar-89a98.firebaseapp.com",
+  projectId: "machbazar-89a98",
+  storageBucket: "machbazar-89a98.appspot.com",
+  messagingSenderId: "134651091304",
+  appId: "1:134651091304:web:1e32fc717fe57c46025edd",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export default app;

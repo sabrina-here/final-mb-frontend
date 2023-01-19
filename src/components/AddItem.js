@@ -11,7 +11,7 @@ import "./AddItem.module.css";
 function AddItem({ user }) {
   console.log(user);
   const { id } = useParams();
-  const imgbbApiKey = "c442e6714115f58c39b00b3070af9fab";
+  const imgbbApiKey = "fbec3594234464779cc915d4dea0c6b8";
   const {
     register,
     handleSubmit,
@@ -63,7 +63,7 @@ function AddItem({ user }) {
         <hr />
         {/* <!-- fish category --> */}
         <label for="category">
-          <b>Choose Category:  </b>
+          <b>Choose Category: </b>
         </label>
         <select id="category" {...register("category", { required: true })}>
           <option value="crab">Crab</option>
