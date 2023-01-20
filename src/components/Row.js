@@ -14,7 +14,7 @@ function Row({ item, handleDelete, total, setTotal }) {
     item.weight = weight;
     // console.log(item);
 
-    fetch(`http://localhost:5000/updateCart/${item._id}`, {
+    fetch(`https://machbazar-back-end.vercel.app/updateCart/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

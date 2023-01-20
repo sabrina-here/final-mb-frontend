@@ -6,7 +6,7 @@ function Categories() {
   const [fishCategories, setFishCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://machbazar-back-end.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setFishCategories(data));
   }, []);
@@ -14,7 +14,13 @@ function Categories() {
   return (
     <div>
       <div className="dropdown open categories">
-        <button className="btn  categories-btn" type="button" aria-expanded="true">Categories</button>
+        <button
+          className="btn  categories-btn"
+          type="button"
+          aria-expanded="true"
+        >
+          Categories
+        </button>
         <ul className="dropdown-menu show">
           {fishCategories.map((fish) => (
             <div key={fish.id}>

@@ -11,7 +11,7 @@ function WishCard({ fish, handleDelete }) {
   const { user } = useContext(AuthContext);
 
   const handleAddToCart = () => {
-    fetch("http://localhost:5000/addCartItem", {
+    fetch("https://machbazar-back-end.vercel.app/addCartItem", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -41,7 +41,7 @@ function App() {
         {
           path: "/productExtendedView/:id",
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/product/${params.id}`),
+            fetch(`https://machbazar-back-end.vercel.app/product/${params.id}`),
           element: (
             <PrivateRoute>
               <ProductExtendedView></ProductExtendedView>
@@ -52,18 +52,20 @@ function App() {
           path: `/categories/:name`,
           element: <SearchResult></SearchResult>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/products/category/${params.name}`),
+            fetch(
+              `https://machbazar-back-end.vercel.app/products/category/${params.name}`
+            ),
         },
         {
           path: "/cart/:uid",
           element: <Cart></Cart>,
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/cart/${params.uid}`),
+            fetch(`https://machbazar-back-end.vercel.app/cart/${params.uid}`),
         },
         {
           path: "/account/:uid",
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/user/${params.uid}`),
+            fetch(`https://machbazar-back-end.vercel.app/user/${params.uid}`),
           element: <MyAccount></MyAccount>,
         },
         {
@@ -89,7 +91,7 @@ function App() {
         {
           path: "/sellerAccount/:uid",
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/user/${params.uid}`),
+            fetch(`https://machbazar-back-end.vercel.app/user/${params.uid}`),
           element: <SellerAccount></SellerAccount>,
         },
         {

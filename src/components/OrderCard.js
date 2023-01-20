@@ -13,11 +13,11 @@ function OrderCard({ order, handleDelete, handleUpdate }) {
   const handleDetails = () => {
     setShow(true);
     if (seller) {
-      fetch(`http://localhost:5000/user/${order.user}`)
+      fetch(`https://machbazar-back-end.vercel.app/user/${order.user}`)
         .then((res) => res.json())
         .then((data) => setModalInfo(data));
     } else {
-      fetch(`http://localhost:5000/user/${order.sellerId}`)
+      fetch(`https://machbazar-back-end.vercel.app/user/${order.sellerId}`)
         .then((res) => res.json())
         .then((data) => setModalInfo(data));
     }

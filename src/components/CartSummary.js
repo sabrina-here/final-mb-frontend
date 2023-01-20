@@ -13,7 +13,7 @@ function CartSummary({ cartItems, setCartItems, total, setTotal }) {
   };
 
   const deleteCart = () => {
-    fetch(`http://localhost:5000/deleteCart/${user.uid}`, {
+    fetch(`https://machbazar-back-end.vercel.app/deleteCart/${user.uid}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -34,7 +34,7 @@ function CartSummary({ cartItems, setCartItems, total, setTotal }) {
       order.user = item.user;
       order.weight = item.weight;
 
-      fetch("http://localhost:5000/order/add", {
+      fetch("https://machbazar-back-end.vercel.app/order/add", {
         method: "POST",
         headers: {
           "content-type": "application/json",

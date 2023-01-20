@@ -25,7 +25,7 @@ function MainNav() {
 
   // ------------------------handling product search------------------
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch("https://machbazar-back-end.vercel.app/categories")
       .then((res) => res.json())
       .then((data) => setFishCategories(data));
   }, []);

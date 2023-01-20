@@ -88,7 +88,7 @@ function SellerRegistration() {
     user.phone = values.phone;
     user.email = values.email;
 
-    fetch("http://localhost:5000/register", {
+    fetch("https://machbazar-back-end.vercel.app/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -109,7 +109,7 @@ function SellerRegistration() {
     user.phone = values.phone;
     user.email = u.email;
 
-    fetch("http://localhost:5000/register", {
+    fetch("https://machbazar-back-end.vercel.app/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",

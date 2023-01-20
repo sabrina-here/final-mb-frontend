@@ -52,7 +52,7 @@ function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log(currentUser);
-      fetch(`http://localhost:5000/user/${currentUser?.uid}`)
+      fetch(`https://machbazar-back-end.vercel.app/user/${currentUser?.uid}`)
         .then((res) => res.json())
         .then((data) => data.userState === "seller" && setSeller(true));
       setLoading(false);

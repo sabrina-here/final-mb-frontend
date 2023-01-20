@@ -12,9 +12,12 @@ function WishList() {
   const { user } = useContext(AuthContext);
 
   const handleDelete = (item) => {
-    fetch(`http://localhost:5000/deleteWishlistedProduct/${item._id}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://machbazar-back-end.vercel.app/deleteWishlistedProduct/${item._id}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -27,7 +30,7 @@ function WishList() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/wishlist/${user.uid}`)
+    fetch(`https://machbazar-back-end.vercel.app/wishlist/${user.uid}`)
       .then((res) => res.json())
       .then((data) => setWishlist(data))
       .catch((e) => console.log(e));

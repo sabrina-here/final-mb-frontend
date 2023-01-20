@@ -12,7 +12,7 @@ function SellerHome() {
       `Are you sure you want to delete: ${fish.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/deleteProduct/${fish._id}`, {
+      fetch(`https://machbazar-back-end.vercel.app/deleteProduct/${fish._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -31,7 +31,7 @@ function SellerHome() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${user.uid}`)
+    fetch(`https://machbazar-back-end.vercel.app/products/${user.uid}`)
       .then((res) => res.json())
       .then((data) => setYourProducts(data));
   }, []);

@@ -18,7 +18,7 @@ function Cart() {
       `Are you sure you want to delete: ${item.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/deleteItem/${item._id}`, {
+      fetch(`https://machbazar-back-end.vercel.app/deleteItem/${item._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

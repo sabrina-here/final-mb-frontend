@@ -17,7 +17,7 @@ function Orders() {
       `Are you sure you want to delete: ${item.name}`
     );
     if (agree) {
-      fetch(`http://localhost:5000/deleteOrder/${item._id}`, {
+      fetch(`https://machbazar-back-end.vercel.app/deleteOrder/${item._id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -42,7 +42,7 @@ function Orders() {
 
   const handleUpdate = (order) => {
     order.orderStatus = "completed";
-    fetch(`http://localhost:5000/updateOrder/${order._id}`, {
+    fetch(`https://machbazar-back-end.vercel.app/updateOrder/${order._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -66,11 +66,11 @@ function Orders() {
 
   useEffect(() => {
     if (seller) {
-      fetch(`http://localhost:5000/seller/order/${user.uid}`)
+      fetch(`https://machbazar-back-end.vercel.app/seller/order/${user.uid}`)
         .then((res) => res.json())
         .then((data) => setOrders(data));
     } else {
-      fetch(`http://localhost:5000/order/${user.uid}`)
+      fetch(`https://machbazar-back-end.vercel.app/order/${user.uid}`)
         .then((res) => res.json())
         .then((data) => setOrders(data));
     }

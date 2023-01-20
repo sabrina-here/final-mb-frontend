@@ -19,7 +19,7 @@ function ProductExtendedView() {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/user/${fish.sellerId}`)
+    fetch(`https://machbazar-back-end.vercel.app/user/${fish.sellerId}`)
       .then((res) => res.json())
       .then((data) => setSeller(data));
 
@@ -35,7 +35,7 @@ function ProductExtendedView() {
   }, []);
 
   const handleAddToCart = () => {
-    fetch("http://localhost:5000/addCartItem", {
+    fetch("https://machbazar-back-end.vercel.app/addCartItem", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -52,7 +52,7 @@ function ProductExtendedView() {
   };
 
   const handleAddToWish = () => {
-    fetch("http://localhost:5000/wishlist/add", {
+    fetch("https://machbazar-back-end.vercel.app/wishlist/add", {
       method: "POST",
       headers: {
         "content-type": "application/json",
