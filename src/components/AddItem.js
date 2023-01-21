@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthContext from "../contexts/AuthProvider";
 import "./AddItem.module.css";
+// ${process.env.REACT_APP_API_URL}
 
 function AddItem({ user }) {
-  console.log(user);
   const { id } = useParams();
   const imgbbApiKey = "fbec3594234464779cc915d4dea0c6b8";
   const {
@@ -31,24 +31,34 @@ function AddItem({ user }) {
 
         // setTimeout(() => {
         if (res.data.success) {
-          console.log("yeah...finally", res);
           const fishImage = res?.data?.data?.url;
           const newProduct = {
             ...data,
             fishImage: fishImage,
             sellerId: user.uid,
           };
-          console.log(fishImage, newProduct);
           if (id) {
             axios
-              .put(`${process.env.REACT_APP_API_URL}/product/${id}`, newProduct)
+              .put(
+                `https://machbazar-back-end.vercel.app/product/${id}`,
+                newProduct
+              )
               .then((res) => toast.success("Product updated successfully!"))
-              .catch((error) => toast.error("Product update failed!"));
+              .catch((error) => {
+                console.log(error);
+                toast.error("Product update failed!");
+              });
           } else {
             axios
-              .post(`${process.env.REACT_APP_API_URL}/product/add`, newProduct)
+              .post(
+                `https://machbazar-back-end.vercel.app/product/add`,
+                newProduct
+              )
               .then((res) => toast.success("Product added successfully!"))
-              .catch((error) => toast.error("Product added failed!"));
+              .catch((error) => {
+                console.log(error);
+                toast.error("Product added failed!");
+              });
           }
         }
         // }, 2000)
