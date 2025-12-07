@@ -88,6 +88,20 @@ function Login() {
     }
   };
 
+  const handleDemoLogin = () => {
+    signIn("demo@customer.com", "democustomer")
+      .then((res) => {
+        const user = res.user;
+        navigate("/");
+        setSeller(false);
+        console.log(user);
+      })
+      .catch((e) => {
+        console.error(e);
+        setError("Wrong Email/Password. Please Try again");
+      });
+  };
+
   return (
     <div className="form login my-4">
       <AllModal
@@ -115,21 +129,29 @@ function Login() {
           {error ? (
             <p className="text-danger">
               {error}{" "}
-              <button className="forgotbtn text-primary d-block" onClick={handleForgotPass}>
+              <button
+                className="forgotbtn text-primary d-block"
+                onClick={handleForgotPass}
+              >
                 forgot password?
               </button>
             </p>
           ) : (
-            <button className="forgotbtn text-primary" onClick={handleForgotPass}>
+            <button
+              className="forgotbtn text-primary"
+              onClick={handleForgotPass}
+            >
               forgot password?
             </button>
           )}
         </a>
 
-        <div className="input-field">
-          <button type="submit" className="button w-100 p-2 mt-0">
-            log in
-          </button>
+        <div className="d-flex gap-2 ">
+          <div className="input-field">
+            <button type="submit" className="button w-100 p-2 mt-0">
+              log in
+            </button>
+          </div>
         </div>
       </form>
 
@@ -153,6 +175,14 @@ function Login() {
         <p>
           <Link to={"/sellerLogin"}>or Login as Seller</Link>
         </p>
+      </div>
+      <div className="input-field">
+        <button
+          onClick={handleDemoLogin}
+          className="btn btn-light border-primary w-100"
+        >
+          Demo Customer log in
+        </button>
       </div>
     </div>
   );

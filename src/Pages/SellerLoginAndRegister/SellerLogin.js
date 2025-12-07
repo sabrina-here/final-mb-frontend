@@ -88,6 +88,20 @@ function SellerLogin() {
     }
   };
 
+  const handleDemoLogin = () => {
+    signIn("demo@seller.com", "demoseller")
+      .then((res) => {
+        const user = res.user;
+        setSeller(true);
+        navigate("/");
+        console.log(user);
+      })
+      .catch((e) => {
+        console.error(e);
+        setError("Wrong Email or Password. Please Try again!");
+      });
+  };
+
   return (
     <div className="form login my-4">
       <AllModal
@@ -159,6 +173,15 @@ function SellerLogin() {
         <p>
           <Link to={"/login"}>or Login as Customer</Link>
         </p>
+      </div>
+
+      <div className="input-field">
+        <button
+          onClick={handleDemoLogin}
+          className="btn btn-light border-primary w-100"
+        >
+          Demo Seller log in
+        </button>
       </div>
     </div>
   );
