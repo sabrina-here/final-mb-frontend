@@ -93,7 +93,7 @@ function SellerLogin() {
       .then((res) => {
         const user = res.user;
         setSeller(true);
-        navigate("/");
+        navigate("/sellerHome");
         console.log(user);
       })
       .catch((e) => {
